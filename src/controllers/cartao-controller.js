@@ -4,7 +4,7 @@ const repository = require('../repositories/cartao-repository');
 const guid = require('guid');
 const authService = require('../services/auth-service');
 
-exports.get = async(req,res,next) => {
+exports.get = async(req) => {
   try {
     var data = await repository.get();
     res.status(200).send(data);
@@ -17,12 +17,8 @@ exports.get = async(req,res,next) => {
 
 exports.create = async(req,res,next) =>{
   try {
-      //recupera o token
       const token = req.body.token || req.query.token || req.headers['x-access-token'];
-      console.log(token);
-      //decodifica o token
       const data = await authService.decodeToken(token);
-
       await repository.create({
         id_pessoa:req.body.id,
         nome:req.body.nome,
