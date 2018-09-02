@@ -7,16 +7,7 @@ const authService = require('../services/auth-service');
 exports.post = async(req,res,next) =>{
   try {
       await repository.create({
-        nome:req.body.nome,
-        cpf:req.body.cpf,
-        cep:req.body.cep,
-        endereco:req.body.endereco,
-        bairro:req.body.bairro,
-        numero:req.body.numero,
-        uf:req.body.uf,
-        email:req.body.email,
-        telefone:req.body.telefone,
-        usuario:req.body.usuario,
+        nome:req.body.nome, cpf:req.body.cpf, cep:req.body.cep,endereco:req.body.endereco,bairro:req.body.bairro,numero:req.body.numero,uf:req.body.uf,email:req.body.email,telefone:req.body.telefone,usuario:req.body.usuario,
         senha:md5(req.body.senha + global.SALT_KEY)
       });
       res.status(201).send({message: 'usuário cadastrado'});
@@ -29,11 +20,7 @@ exports.post = async(req,res,next) =>{
 
 exports.authenticate = async(req,res,next) =>{
   try {
-      console.log("Usuario"+req.body.usuario);
-      const pessoa = await repository.authenticate({
-        usuario:req.body.usuario,
-        senha:md5(req.body.senha + global.SALT_KEY)
-      });
+      const pessoa = await repository.authenticate({ usuario:req.body.usuario,senha:md5(req.body.senha + global.SALT_KEY)});
       if(!pessoa){
         res.status(404).send({
           message:'Aaaah não, usuário ou senha inválidos'
