@@ -22,26 +22,14 @@ exports.authenticate = async(req,res,next) =>{
   try {
       const pessoa = await repository.authenticate({ usuario:req.body.usuario,senha:md5(req.body.senha + global.SALT_KEY)});
       if(!pessoa){
-        res.status(404).send({
-          message:'Aaaah não, usuário ou senha inválidos'
-        });
+        res.status(404).send({message:'Aaaah não, usuário ou senha inválidos'});
         return;
       }
-      const token = await authService.generateToken({
-        email:pessoa.email,
-        nome:pessoa.nome
+      const token = await authService.generateToken({email:pessoa.email,nome:pessoa.nome
       });
-      res.status(200).send({
-        token: token,
-        data:{
-          id:pessoa._id,
-          email:pessoa.email,
-          nome:pessoa.nome
-        }
+      res.status(200).send({token: token,data:{id:pessoa._id,email:pessoa.email,nome:pessoa.nome}
     });
-  } catch (e) {
-    res.status(400).send({
-      message:'Falha no auth'+e
-    });
+  } catch (e1) {
+    res.status(400).send({message:'Falha no auth'+e1});
   }
 };
