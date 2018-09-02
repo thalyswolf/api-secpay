@@ -25,3 +25,7 @@ exports.confirmar = async(id, data) => {
   });
   return res;
 }
+exports.get = async(data) => {
+var res = await Pagamento.findById("5b8b1a03674f6716dcf2152d")
+return res;
+}
