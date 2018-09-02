@@ -11,7 +11,6 @@ var cors = require('cors');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extend:false }));
 
-//habilita o cors
 app.use(cors());
 
 //conecta ao banco

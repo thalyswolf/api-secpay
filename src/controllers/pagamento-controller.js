@@ -7,7 +7,7 @@ const authService = require('../services/auth-service');
 exports.create = async(req,res,next) =>{
   try {
       //recupera o token
-      const token = req.body.token || req.query.token || req.headers['x-access-token'];
+      //const token = req.body.token || req.query.token || req.headers['x-access-token'];
       console.log(req.body.status);
       //decodifica o token
       const data = await authService.decodeToken(token);
@@ -28,10 +28,10 @@ exports.create = async(req,res,next) =>{
 exports.confirmar = async(req,res,next) =>{
   try {
       //recupera o token
-      const token = req.body.token || req.query.token || req.headers['x-access-token'];
+      //const token = req.body.token || req.query.token || req.headers['x-access-token'];
       console.log(req.body.status);
       //decodifica o token
-      const data = await authService.decodeToken(token);
+      //const data = await authService.decodeToken(token);
       await repository.confirmar(req.body.usuarioid, {
         usuarioid:req.body.usuarioid,
         status:req.body.status,
